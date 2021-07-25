@@ -1,5 +1,5 @@
-const Policy = artifacts.require("Policy");
+const Policy = artifacts.require("Policies");
 
 module.exports = function (deployer) {
-  deployer.deploy(Policy);
+  deployer.deploy(Policies);
 };

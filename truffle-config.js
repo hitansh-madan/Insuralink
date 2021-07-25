@@ -10,7 +10,7 @@ module.exports = {
     develop: {
       port: 8545,
     },
-    dvanced: {
+    advanced: {
       websockets: true, // Enable EventEmitter interface for web3 (default: false)
     },
   },
