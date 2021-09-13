@@ -1,3 +1,4 @@
+import 'package:Insuralink/models/User.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web3dart/credentials.dart';
@@ -47,16 +48,14 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
   @override
   Stream<LogInState> mapEventToState(LogInEvent event) async* {
     if (event is LogInButtonPressed) {
-      //yield LogInLoading();
-      final request = LogInRequest(event.email, event.password);
 
       try {
-        final response = await UserService().login(request);
-        authenticationBloc.add(LoggedIn(response.jwt, response.email));
-      } on UnauthorizedException {
-        yield SignInFailure('Invalid email or password. Please try again.');
-      } catch (error) {
-        yield SignInFailure(error.toString());
+        final userService = await UserService.init(event.privateKey);
+        if(! await userService.isCustomer()) throw LogInState.unknown();
+        final user = User.fromResponse(await userService.getCustomer(), event.privateKey);
+        authenticationBloc.add(LoggedIn(event.privateKey,user));
+      }  catch (error) {
+        yield LogInState.notLoggedIn();
       }
     }
   }

@@ -90,11 +90,6 @@ contract Policy {
         state = policy_state.claimed;
     }
 
-    /*
-
-    TODO: function changeCustomerId() - set customerId to a different account.
-    TODO: time based premiums - requires checkStatus() to implement. (also add a grace period)
-    */
     //getState , getPremium , getAmount not required , use default getters;
 }
 

@@ -72,6 +72,7 @@ class AuthenticationBloc
     yield AuthenticationState.authenticated();
   }
 
+
   Stream<AuthenticationState> _loggedIn(LoggedIn event) async* {
    // yield AuthenticationLoading();
     await authenticationRepository.persistKey(event.privateKey);

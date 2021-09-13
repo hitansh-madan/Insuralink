@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
 
+  static Route route() {
+    return MaterialPageRoute<void>(builder: (_) => LoginView());
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   @override
